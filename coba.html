@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencarian Barang</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+        body {
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        .item {
+            background: #f4f4f4;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            display: none; /* Barang awalnya disembunyikan */
+        }
+        .item h3 {
+            margin: 0;
+        }
+        .item p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cari Barang</h2>
+    <input type="text" id="searchBox" onkeyup="cariBarang()" placeholder="Cari barang...">
+    
+    <div id="listBarang">
+        <div class="item" data-name="beras">
+            <h3>Beras</h3>
+            <p>Harga: Rp 12.000/kg</p>
+            <p>Stok: 50 kg</p>
+        </div>
+        <div class="item" data-name="minyak goreng">
+            <h3>Minyak Goreng</h3>
+            <p>Harga: Rp 18.000/liter</p>
+            <p>Stok: 30 liter</p>
+        </div>
+        <div class="item" data-name="gula pasir">
+            <h3>Gula Pasir</h3>
+            <p>Harga: Rp 14.000/kg</p>
+            <p>Stok: 40 kg</p>
+        </div>
+        <div class="item" data-name="telur ayam">
+            <h3>Telur Ayam</h3>
+            <p>Harga: Rp 27.000/kg</p>
+            <p>Stok: 20 kg</p>
+        </div>
+        <div class="item" data-name="garam">
+            <h3>Garam</h3>
+            <p>Harga: Rp 5.000/kg</p>
+            <p>Stok: 100 kg</p>
+        </div>
+        <div class="item" data-name="mie instan">
+            <h3>Mie Instan</h3>
+            <p>Harga: Rp 3.000/bungkus</p>
+            <p>Stok: 200 bungkus</p>
+        </div>
+    </div>
+
+    <script>
+        function cariBarang() {
+            let input = document.getElementById('searchBox').value.toLowerCase();
+            let items = document.querySelectorAll('.item');
+
+            items.forEach(function(item) {
+                let namaBarang = item.getAttribute('data-name');
+                if (namaBarang.includes(input) && input !== '') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
