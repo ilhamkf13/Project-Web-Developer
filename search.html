@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Harga Bahan Pokok</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-100 p-6">
+    <div class="max-w-3xl mx-auto">
+        <div class="flex items-center mb-4"></div>
+        <i class="fas fa-search text-green-900 mr-2"></i>
+        <input type="text" id="search" placeholder="Cari Harga Bahan Pokok" 
+               class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+        <div id="item-container" class="flex overflow-x-auto gap-4 mt-4 p-2">
+        </div>   <!-- Barang akan dimuat di sini -->
+        </div>
+    </div>
+
+    <script>
+        const items = [
+            { name: "Tomat", price: "Rp 10.000/kg", img: "assets/tomat.jpg" },
+            { name: "Beras", price: "Rp 12.000/kg", img: "assets/beras.jpg" },
+            { name: "Cabai", price: "Rp 30.000/kg", img: "assets/cabe.jpg" },
+            { name: "Gula", price: "Rp 14.000/kg", img: "assets/gula.jpg" },
+            { name: "Minyak Goreng", price: "Rp 18.000/liter", img: "assets/minyak.jpg" }
+        ];
+        
+        const container = document.getElementById("item-container");
+        const searchInput = document.getElementById("search");
+
+        function renderItems(filter = "") {
+            container.innerHTML = "";
+            items.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()))
+                .forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "bg-white p-4 rounded-md shadow-md text-center min-w-[150px]";
+                    div.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="mx-auto mb-2 h-20">
+                        <p class="font-semibold">${item.name}</p>
+                        <p class="text-green-600 font-bold">${item.price}</p>
+                    `;
+                    container.appendChild(div);
+                });
+        }
+
+        searchInput.addEventListener("input", (e) => {
+            renderItems(e.target.value);
+        });
+
+        renderItems();
+    </script>
+</body>
+</html>
